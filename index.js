@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors")
 const Period = require("./models/period.model");
 const app = express();
 const PORT = 8080;
@@ -11,6 +12,7 @@ function toTitleCase(str) {
   );
 }
 
+app.use(cors())
 app.use(express.json());
 
 app.post("/api/periods", async (req, res) => {

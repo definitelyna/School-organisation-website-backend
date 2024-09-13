@@ -3,7 +3,11 @@ const mongoose = require("mongoose");
 const cors = require("cors")
 const Period = require("./models/period.model");
 const app = express();
-const PORT = 8080;
+require("dotenv").config()
+
+const PORT = process.env.PORT || 3000
+const dbURL = process.env.MONGO_URL;
+
 
 function toTitleCase(str) {
   return str.replace(
@@ -73,7 +77,7 @@ app.put("/api/periods/update/:id", async (req, res) => {
 
 mongoose
   .connect(
-    "mongodb+srv://na:mongodbpassword@schoolorganisationwebsi.dkfx1.mongodb.net/timetable?retryWrites=true&w=majority&appName=SchoolOrganisationWebsiteDB"
+    dbURL
   )
   .then(() => {
     console.log("Connected to database");
